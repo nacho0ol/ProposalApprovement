@@ -1,0 +1,22 @@
+import { Controller, Get } from '@nestjs/common';
+import { HomeService } from './home.service';
+
+@Controller('home')
+export class HomeController {
+  constructor(private readonly homeService: HomeService) {}
+
+  @Get('summary')
+  async getSummary() {
+    return this.homeService.getSummary();
+  }
+
+  @Get('institution-types')
+  async getInstitutionTypes() {
+    return this.homeService.getInstitutionTypes();
+  }
+
+  @Get('regions')
+  async getRegionStats() {
+    return this.homeService.getRegionStats();
+  }
+}
