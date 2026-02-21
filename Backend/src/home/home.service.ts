@@ -1,9 +1,8 @@
 import { Injectable, InternalServerErrorException } from '@nestjs/common';
-import { pool } from '../db'; // Import koneksi database kita
+import { pool } from '../db';
 
 @Injectable()
 export class HomeService {
-  // 1. Endpoint Summary Global
   async getSummary() {
     try {
       const [[publisherCount]]: any = await pool.query(
@@ -21,8 +20,8 @@ export class HomeService {
         publisher_totals: publisherCount.total,
         journal_totals: journalData.total_journals || 0,
         accredited_journals: journalData.accredited_journals || 0,
-        waive_totals: 5, // Data statis dari proposal
-        similarity: 318, // Data statis dari proposal
+        waive_totals: 5,
+        similarity: 318,
       };
     } catch (error) {
       console.error(error);
@@ -30,7 +29,6 @@ export class HomeService {
     }
   }
 
-  // 2. Endpoint Tipe Institusi
   async getInstitutionTypes() {
     try {
       const [rows]: any = await pool.query(`
@@ -47,10 +45,8 @@ export class HomeService {
     }
   }
 
-  // 3. Endpoint Persebaran Peta (Region)
   async getRegionStats() {
     try {
-      // Query ini akan me-return format JSON yang siap dibaca oleh library peta di Next.js (react-simple-maps)
       const [rows]: any = await pool.query(`
         SELECT r.name, r.iso_code as id, COUNT(i.id) as value
         FROM regions r
