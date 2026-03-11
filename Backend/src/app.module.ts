@@ -7,6 +7,10 @@ import { HomeModule } from './home/home.module';
 import { InvoicesModule } from './invoices/invoices.module';
 import { PaymentsModule } from './payments/payments.module'; // <-- INI WAJIB ADA
 import { ProfileModule } from './profile/profile.module';
+import { AdminModule } from './admin/admin.module';
+import { StatisticsModule } from './statistics/statistics.module';
+import { FeesModule } from './fees/fees.module';
+
 
 @Module({
   imports: [
@@ -15,7 +19,10 @@ import { ProfileModule } from './profile/profile.module';
     HomeModule,
     InvoicesModule,
     PaymentsModule,
-    ProfileModule, 
+    ProfileModule,
+    AdminModule,
+    StatisticsModule,
+    FeesModule, 
   ],
   controllers: [AppController],
   providers: [AppService],

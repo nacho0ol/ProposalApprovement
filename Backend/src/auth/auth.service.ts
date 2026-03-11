@@ -98,6 +98,7 @@ export class AuthService {
       message: 'Login sukses!',
       userId: user.id,
       institutionId: user.institution_id,
+      role: user.role,
     };
   }
 }

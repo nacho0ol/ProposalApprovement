@@ -1,9 +1,9 @@
-import './globals.css';
-import type { Metadata } from 'next';
+import type { Metadata } from "next";
+import "./globals.css";
 
 export const metadata: Metadata = {
-  title: 'Proposal Approvement - RJI',
-  description: 'Sistem Approval Jurnal Relawan Jurnal Indonesia',
+  title: "Atlantis Press",
+  description: "Proceedings organiser environment",
 };
 
 export default function RootLayout({
@@ -12,7 +12,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body>{children}</body>
     </html>
   );

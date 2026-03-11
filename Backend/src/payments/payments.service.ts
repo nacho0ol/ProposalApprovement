@@ -7,16 +7,15 @@ import { pool } from '../db';
 
 @Injectable()
 export class PaymentsService {
-  async processPayment(body: any, files: any) {
+  async processPayment(body: any, file: any) {
     try {
-      const proofUrl = files.proof_of_transfer[0].filename;
-      const letterUrl = files.assignment_letter[0].filename;
+      const proofUrl = file.filename;
 
       const [result]: any = await pool.query(
         `UPDATE invoices 
-        SET status = 'PENDING', proof_of_transfer = ?, assignment_letter = ? 
+        SET status = 'PENDING', proof_of_transfer = ? 
         WHERE invoice_number = ? AND status = 'UNPAID'`,
-        [proofUrl, letterUrl, body.invoice_number],
+        [proofUrl, body.invoice_number],
       );
 
       if (result.affectedRows === 0) {
@@ -30,7 +29,6 @@ export class PaymentsService {
           'Pembayaran berhasil dikirim! Silakan tunggu validasi dari admin RJI.',
         invoice_number: body.invoice_number,
         file_struk: proofUrl,
-        file_surat_tugas: letterUrl,
       };
     } catch (error: any) {
       console.error('ERROR PAYMENT:', error.message);
@@ -38,6 +36,7 @@ export class PaymentsService {
       throw new InternalServerErrorException('Gagal memproses pembayaran.');
     }
   }
+
   async validatePayment(body: any) {
     try {
       const [result]: any = await pool.query(

@@ -19,7 +19,7 @@ export class HomeService {
       return {
         publisher_totals: publisherCount.total,
         journal_totals: journalData.total_journals || 0,
-        accredited_journals: journalData.accredited_journals || 0,
+        accredited_journals: Number(journalData.accredited_journals) || 0,
         waive_totals: 5,
         similarity: 318,
       };
